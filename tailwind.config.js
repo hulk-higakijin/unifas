@@ -6,7 +6,8 @@ module.exports = {
     './app/javascript/**/*.js'
   ],
   plugins: [
-    require("daisyui")
+    require("daisyui"),
+    require('flowbite/plugin')
   ],
   daisyui: {
     themes: ["winter"],
