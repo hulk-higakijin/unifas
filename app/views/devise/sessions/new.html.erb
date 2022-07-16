@@ -30,6 +30,9 @@
                 </div>
                 <%= link_to t(".forgot_your_password"), new_password_path(resource_name), class: "text-sm font-medium text-primary-600 hover:underline dark:text-primary-500" %>
               </div>
+              <div class="flex" style="<%= 'display: none;' unless alert %>">
+                <p class="text-sm text-red-500"><%= alert %></p>
+              </div>
             <% end %>
             <%= f.submit t('.sign_in'), class: "btn btn-primary btn-sm text-white" %>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400"> Don’t have an account yet?
