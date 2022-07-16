@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_16_074924) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_16_081833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_16_074924) do
     t.index ["account_id"], name: "index_candidates_on_account_id"
   end
 
+  create_table "faculties", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id"], name: "index_faculties_on_university_id"
+  end
+
+  create_table "prefectures", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "professors", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "name", null: false
@@ -45,6 +59,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_16_074924) do
     t.index ["account_id"], name: "index_professors_on_account_id"
   end
 
+  create_table "universities", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "note"
+    t.bigint "prefecture_id", null: false
+    t.text "url"
+    t.boolean "active", default: false
+    t.text "introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prefecture_id"], name: "index_universities_on_prefecture_id"
+  end
+
   add_foreign_key "candidates", "accounts"
+  add_foreign_key "faculties", "universities"
   add_foreign_key "professors", "accounts"
+  add_foreign_key "universities", "prefectures"
 end
