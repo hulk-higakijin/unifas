@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
+gem 'any_login'
 gem 'bootsnap', require: false
 gem 'cssbundling-rails'
 gem 'devise'
@@ -29,7 +30,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'any_login'
   gem 'web-console'
 end
 
