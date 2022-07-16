@@ -6,6 +6,6 @@ class Professor < ApplicationRecord
   private
 
     def update_status
-      self.account.professor!
+      account.professor!
     end
 end

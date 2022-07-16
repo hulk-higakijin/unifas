@@ -6,6 +6,6 @@ class Candidate < ApplicationRecord
   private
 
     def update_status
-      self.account.candidate!
+      account.candidate!
     end
 end
