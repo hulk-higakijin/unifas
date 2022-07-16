@@ -1,7 +1,7 @@
 <nav class="p-4 bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
     <a href="/" class="flex items-center">
-      <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+      <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Unifas</span>
     </a>
     <button data-collapse-toggle="mobile-menu" type="button"
       class="inline-flex justify-center items-center ml-3 text-gray-400 rounded-lg md:hidden hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-500"
@@ -17,12 +17,10 @@
     <div class="hidden w-full md:block md:w-auto" id="mobile-menu">
       <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
         <li>
-          <a href="#"
-            class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"
-            aria-current="page">Home</a>
+          <%= link_to "Home", root_path, class: (request.path == '/' ? "text-primary" : "text-neutral hover:text-primary") %>
         </li>
         <li>
-          <%= link_to "Recruitments", recruitments_path, class: "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent" %>
+          <%= link_to "Recruitments", recruitments_path, class: (request.path.include?('/recruitments') ? "text-primary" : "text-neutral hover:text-primary") %>
         </li>
         <li>
           <a href="#"
@@ -34,11 +32,11 @@
         </li>
         <% if account_signed_in? %>
           <li>
-            <%= link_to "Logout", destroy_account_session_path, data: { turbo_method: :delete }, class: "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent" %>
+            <%= link_to "Logout", destroy_account_session_path, data: { turbo_method: :delete }, class: "text-neutral hover:text-primary" %>
           </li>
         <% else %>
           <li>
-            <%= link_to "Login", new_account_session_path, class: "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent" %>
+            <%= link_to "Login", new_account_session_path, class: "text-neutral hover:text-primary" %>
           </li>
         <% end %>
       </ul>
