@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_16_081833) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_16_082627) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +59,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_16_081833) do
     t.index ["account_id"], name: "index_professors_on_account_id"
   end
 
+  create_table "recruitments", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "professor_id", null: false
+    t.bigint "faculty_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["faculty_id"], name: "index_recruitments_on_faculty_id"
+    t.index ["professor_id"], name: "index_recruitments_on_professor_id"
+  end
+
   create_table "universities", force: :cascade do |t|
     t.string "name", null: false
     t.text "note"
@@ -74,5 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_16_081833) do
   add_foreign_key "candidates", "accounts"
   add_foreign_key "faculties", "universities"
   add_foreign_key "professors", "accounts"
+  add_foreign_key "recruitments", "faculties"
+  add_foreign_key "recruitments", "professors"
   add_foreign_key "universities", "prefectures"
 end
