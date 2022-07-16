@@ -1,22 +1,17 @@
-<div id="<%= dom_id recruitment %>">
-  <p>
-    <strong>Title:</strong>
-    <%= recruitment.title %>
-  </p>
+<%= link_to recruitment_path(recruitment) do %>
+  <div class="card w-96 bg-base-100 shadow-xl mx-auto" id="<%= dom_id recruitment %>">
+    <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+    <div class="card-body">
+      <h2 class="card-title">
+        <%= recruitment.title %>
+        <div class="badge badge-secondary">NEW</div>
+      </h2>
+      <p><%= recruitment.body %></p>
+      <div class="card-actions justify-end">
+        <div class="badge badge-outline"><%= recruitment.faculty.university.name %></div>
+        <div class="badge badge-outline"><%= recruitment.faculty.name %></div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
-  <p>
-    <strong>Body:</strong>
-    <%= recruitment.body %>
-  </p>
-
-  <p>
-    <strong>Professor:</strong>
-    <%= recruitment.professor_id %>
-  </p>
-
-  <p>
-    <strong>Faculty:</strong>
-    <%= recruitment.faculty_id %>
-  </p>
-
-</div>

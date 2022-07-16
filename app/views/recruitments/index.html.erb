@@ -1,14 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<%= render "layouts/navbar" %>
 
-<h1>Recruitments</h1>
+<section class="container mx-auto">
+  <h1>Recruitments</h1>
 
-<div id="recruitments">
-  <% @recruitments.each do |recruitment| %>
-    <%= render recruitment %>
-    <p>
-      <%= link_to "Show this recruitment", recruitment %>
-    </p>
-  <% end %>
-</div>
+  <div id="recruitments" class="grid md:grid-cols-3 gap-2">
+    <% @recruitments.each do |recruitment| %>
+      <%= render recruitment %>
+    <% end %>
+  </div>
 
-<%= link_to "New recruitment", new_recruitment_path %>
+  <%= link_to "New recruitment", new_recruitment_path %>
+</section>
