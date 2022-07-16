@@ -1,10 +1,25 @@
-<p style="color: green"><%= notice %></p>
+<%= render "layouts/navbar" %>
+<section class="container mx-auto px-4 md:px-0 md:py-6 flex flex-col gap-y-4">
+  <div class="flex">
+    <div class="flex gap-x-2">
+      <div class="badge badge-outline"><%= @recruitment.faculty.university.name %></div>
+      <div class="badge badge-outline"><%= @recruitment.faculty.name %></div>
+    </div>
+    <div class="ml-auto">
+      <p class="text-sm font-bold">on <%= format(@recruitment.created_at) %></p>
+    </div>
+  </div>
+  <h1 class="font-bold text-base-content text-3xl"><%= @recruitment.title %></h1>
+  <div class="flex gap-x-2">
+    <%= image_tag("https://pbs.twimg.com/profile_images/1388720052862525444/6Ge2RLYf_400x400.jpg", class: "w-10 rounded-full border border-gray-200 shadow-xl") %>
+    <p class="my-auto"><%= @recruitment.professor.name %></p>
+  </div>
+  <%= image_tag("https://cdn-ak.f.st-hatena.com/images/fotolife/t/travelyokohama/20210402/20210402171756.jpg", class: "object-cover h-96") %>
 
-<%= render @recruitment %>
+  <div>
+    <%= link_to "Edit this recruitment", edit_recruitment_path(@recruitment) %> |
+    <%= link_to "Back to recruitments", recruitments_path %>
 
-<div>
-  <%= link_to "Edit this recruitment", edit_recruitment_path(@recruitment) %> |
-  <%= link_to "Back to recruitments", recruitments_path %>
-
-  <%= button_to "Destroy this recruitment", @recruitment, method: :delete %>
-</div>
+    <%= button_to "Destroy this recruitment", @recruitment, method: :delete %>
+  </div>
+</section>
