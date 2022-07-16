@@ -4,5 +4,12 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js'
-  ]
+  ],
+  plugins: [
+    require("daisyui"),
+    require('flowbite/plugin')
+  ],
+  daisyui: {
+    themes: ["winter"],
+  }
 }
