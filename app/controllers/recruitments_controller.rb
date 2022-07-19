@@ -1,5 +1,6 @@
 class RecruitmentsController < ApplicationController
   before_action :set_recruitment, only: %i[show edit update destroy]
+  before_action :set_professor, only: %i[new]
 
   # GET /recruitments or /recruitments.json
   def index
@@ -24,16 +25,12 @@ class RecruitmentsController < ApplicationController
 
   # POST /recruitments or /recruitments.json
   def create
-    @recruitment = Recruitment.new(recruitment_params)
+    @recruitment = @professor.recruitments.new(recruitment_params)
 
-    respond_to do |format|
-      if @recruitment.save
-        format.html { redirect_to recruitment_url(@recruitment), notice: 'Recruitment was successfully created.' }
-        format.json { render :show, status: :created, location: @recruitment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @recruitment.errors, status: :unprocessable_entity }
-      end
+    if @recruitment.save
+      redirect_to recruitment_path(@recruitment)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -65,6 +62,10 @@ class RecruitmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_recruitment
       @recruitment = Recruitment.find(params[:id])
+    end
+
+    def set_professor
+      @professor = current_account.professor
     end
 
     # Only allow a list of trusted parameters through.

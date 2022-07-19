@@ -6,6 +6,6 @@
 
   <%= turbo_frame_tag "select-faculties", class: "flex flex-col w-1/2" do %>
     <%= label(:faculty, :name, "Faculty") %>
-    <%= collection_select(:faculty, :name, @university ? @university.faculties : [], :id, :name, { include_blank: "学部を選択してください", selected: @recruitment&.faculty&.id }, { class: "w-full input input-bordered input-secondary" }) %>
+    <%= collection_select(:recruitment, :faculty_id, @university ? @university.faculties : [], :id, :name, { include_blank: "学部を選択してください", selected: @recruitment&.faculty&.id }, { class: "w-full input input-bordered input-secondary", form: "recruitment-form" }) %>
   <% end %>
 </div>
