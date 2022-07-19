@@ -1,0 +1,11 @@
+<div class="flex gap-x-4">
+  <%= form_with(url: new_recruitment_path, method: :get, data: { controller: "form", turbo_frame: "select-faculties" }, class: "flex flex-col w-1/2") do |f| %>
+    <%= f.label(:name, "University") %>
+    <%= f.collection_select(:university_id, @universities, :id, :name, { include_blank: "大学を選択してください", selected: @university&.id }, { class: "w-full input input-bordered input-secondary", data: { action: "change->form#submit" }}) %>
+  <% end %>
+
+  <%= turbo_frame_tag "select-faculties", class: "flex flex-col w-1/2" do %>
+    <%= label(:faculty, :name, "Faculty") %>
+    <%= collection_select(:faculty, :name, @university ? @university.faculties : [], :id, :name, { include_blank: "学部を選択してください", selected: @recruitment&.faculty&.id }, { class: "w-full input input-bordered input-secondary" }) %>
+  <% end %>
+</div>

@@ -12,10 +12,15 @@ class RecruitmentsController < ApplicationController
   # GET /recruitments/new
   def new
     @recruitment = Recruitment.new
+    @universities = University.active ## professor_universtiesを参照して、教授の大学のみを選択可能にする
+    @university = University.find_by(id: params[:university_id])
   end
 
   # GET /recruitments/1/edit
-  def edit; end
+  def edit
+    @universities = University.active
+    @university = @recruitment.faculty.university
+  end
 
   # POST /recruitments or /recruitments.json
   def create
@@ -64,6 +69,6 @@ class RecruitmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recruitment_params
-      params.require(:recruitment).permit(:title, :body, :professor_id, :faculty_id)
+      params.require(:recruitment).permit(:title, :body, :faculty_id)
     end
 end

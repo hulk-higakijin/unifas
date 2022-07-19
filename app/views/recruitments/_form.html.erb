@@ -1,37 +1,21 @@
-<%= form_with(model: recruitment) do |form| %>
-  <% if recruitment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(recruitment.errors.count, "error") %> prohibited this recruitment from being saved:</h2>
-
-      <ul>
-        <% recruitment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <section class="max-w-xl mx-auto">
+    <h1 class="font-bold py-2 text-2xl">募集を作成</h1>
+    <div class="flex flex-col gap-4">
+      <%= render "components/select_faculty" %>
+      <%= form_with(model: recruitment, class: "flex flex-col gap-y-4") do |form| %>
+        <div>
+          <%= form.label :title, style: "display: block" %>
+          <%= form.text_field :title, class: "input input-bordered input-secondary w-full" %>
+        </div>
+        <div>
+          <%= form.label :body, style: "display: block" %>
+          <%= form.text_area :body, class: "input input-bordered input-secondary w-full h-96" %>
+        </div>
+        <div class="flex">
+          <%= form.submit "登録する", class: "btn btn-primary btn-sm text-white ml-auto" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </section>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
 
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div>
-    <%= form.label :professor_id, style: "display: block" %>
-    <%= form.text_field :professor_id %>
-  </div>
-
-  <div>
-    <%= form.label :faculty_id, style: "display: block" %>
-    <%= form.text_field :faculty_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
