@@ -1,6 +1,6 @@
 class RecruitmentsController < ApplicationController
   before_action :set_recruitment, only: %i[show edit update destroy]
-  before_action :set_professor, only: %i[new]
+  before_action :set_professor, only: %i[create update]
 
   # GET /recruitments or /recruitments.json
   def index
@@ -36,25 +36,17 @@ class RecruitmentsController < ApplicationController
 
   # PATCH/PUT /recruitments/1 or /recruitments/1.json
   def update
-    respond_to do |format|
-      if @recruitment.update(recruitment_params)
-        format.html { redirect_to recruitment_url(@recruitment), notice: 'Recruitment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recruitment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @recruitment.errors, status: :unprocessable_entity }
-      end
+    if @recruitment.update(recruitment_params)
+      redirect_to recruitment_url(@recruitment)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /recruitments/1 or /recruitments/1.json
   def destroy
     @recruitment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to recruitments_url, notice: 'Recruitment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to recruitments_url, notice: 'Recruitment was successfully destroyed.'
   end
 
   private
