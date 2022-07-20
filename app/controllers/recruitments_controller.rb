@@ -1,4 +1,6 @@
 class RecruitmentsController < ApplicationController
+  before_action :authenticate_account!, only: %i[new]
+  before_action :authenticate_professor!, only: %i[new]
   before_action :set_recruitment, only: %i[show edit update destroy]
   before_action :set_professor, only: %i[create update]
 
@@ -50,6 +52,10 @@ class RecruitmentsController < ApplicationController
   end
 
   private
+
+    def authenticate_professor!
+      redirect_to root_path unless current_account.professor?
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_recruitment
