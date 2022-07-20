@@ -1,5 +1,5 @@
 class RecruitmentsController < ApplicationController
-  before_action -> { authenticate_account! &&  authenticate_professor! }, only: %i[new]
+  before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new]
   before_action :set_recruitment, only: %i[show edit update destroy]
   before_action :set_professor, only: %i[create update]
 
