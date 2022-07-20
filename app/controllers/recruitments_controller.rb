@@ -17,7 +17,7 @@ class RecruitmentsController < ApplicationController
 
   def edit
     @universities = University.active ## 同上
-    @university = @recruitment.faculty.university
+    @university = @recruitment.university
   end
 
   def create

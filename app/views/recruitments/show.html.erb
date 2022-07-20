@@ -2,7 +2,7 @@
 <section class="container mx-auto px-4 md:px-0 md:py-6 flex flex-col gap-y-4">
   <div class="flex">
     <div class="flex gap-x-2">
-      <div class="badge badge-outline"><%= @recruitment.faculty.university.name %></div>
+      <div class="badge badge-outline"><%= @recruitment.university.name %></div>
       <div class="badge badge-outline"><%= @recruitment.faculty.name %></div>
     </div>
     <div class="ml-auto">
@@ -17,7 +17,7 @@
   <%= image_tag("https://cdn-ak.f.st-hatena.com/images/fotolife/t/travelyokohama/20210402/20210402171756.jpg", class: "object-cover h-96") %>
   <div class="flex">
     <p class="py-2">
-      <i class="fa-solid fa-location-dot h-5 w-5 px-4"></i><%= @recruitment.faculty.university.prefecture.name %>
+      <i class="fa-solid fa-location-dot h-5 w-5 px-4"></i><%= @recruitment.university.prefecture.name %>
     </p>
   </div>
   <div class="flex">
