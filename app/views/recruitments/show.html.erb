@@ -11,8 +11,18 @@
   </div>
   <h1 class="font-bold text-3xl"><%= @recruitment.title %></h1>
   <div class="flex gap-x-2">
-    <%= image_tag("https://pbs.twimg.com/profile_images/1388720052862525444/6Ge2RLYf_400x400.jpg", class: "w-10 rounded-full border border-gray-200 shadow-xl") %>
+    <%= image_tag("https://pbs.twimg.com/profile_images/1388720052862525444/6Ge2RLYf_400x400.jpg", class: "w-10 h-10 my-auto rounded-full border border-gray-200 shadow-xl") %>
     <p class="my-auto"><%= @recruitment.professor.name %></p>
+    <% if account_signed_in? && @recruitment.professor_id == current_account.professor.id %>
+      <div class="ml-auto flex gap-x-2">
+        <%= link_to edit_recruitment_path(@recruitment) do %>
+          <i class="fa-solid fa-pen h-5 p-2 my-auto rounded-md border-2 border-primary hover:bg-primary text-primary hover:text-base-100"></i>
+        <% end %>
+        <%= button_to @recruitment, method: :delete, form: { data: { 'turbo-confirm': "「#{@recruitment.title}」を削除しますか？" }} do %>
+          <i class="fa-solid fa-trash h-5 p-2 my-auto rounded-md border-2 border-error hover:bg-error text-error hover:text-base-100"></i> 
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <%= image_tag("https://cdn-ak.f.st-hatena.com/images/fotolife/t/travelyokohama/20210402/20210402171756.jpg", class: "object-cover h-96") %>
   <div class="flex">
@@ -22,12 +32,5 @@
   </div>
   <div class="flex">
     <%= @recruitment.body %>
-  </div>
-
-  <div>
-    <%= link_to "Edit this recruitment", edit_recruitment_path(@recruitment) %> |
-    <%= link_to "Back to recruitments", recruitments_path %>
-
-    <%= button_to "Destroy this recruitment", @recruitment, method: :delete %>
   </div>
 </section>
