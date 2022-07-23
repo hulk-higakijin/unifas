@@ -1,5 +1,5 @@
 class RecruitmentsController < ApplicationController
-  before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new edit]
+  before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new edit create update]
   before_action :set_recruitment, only: %i[show edit update destroy]
   before_action :set_professor, only: %i[create update edit]
   before_action :need_permission, only: %i[edit]
@@ -26,6 +26,7 @@ class RecruitmentsController < ApplicationController
     if @recruitment.save
       redirect_to recruitment_path(@recruitment)
     else
+      @universities = University.active ## 同上
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,6 +35,7 @@ class RecruitmentsController < ApplicationController
     if @recruitment.update(recruitment_params)
       redirect_to recruitment_url(@recruitment)
     else
+      @universities = University.active ## 同上
       render :edit, status: :unprocessable_entity
     end
   end
