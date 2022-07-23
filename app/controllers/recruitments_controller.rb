@@ -1,10 +1,11 @@
 class RecruitmentsController < ApplicationController
-  before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new]
+  before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new edit]
   before_action :set_recruitment, only: %i[show edit update destroy]
-  before_action :set_professor, only: %i[create update]
+  before_action :set_professor, only: %i[create update edit]
+  before_action :need_permission, only: %i[edit]
 
   def index
-    @recruitments = Recruitment.all
+    @recruitments = Recruitment.eager_load([faculty: :university])
   end
 
   def show; end
@@ -44,16 +45,20 @@ class RecruitmentsController < ApplicationController
 
   private
 
-    def authenticate_professor!
-      redirect_to root_path unless current_account.professor?
-    end
-
     def set_recruitment
       @recruitment = Recruitment.find(params[:id])
     end
 
     def set_professor
       @professor = current_account.professor
+    end
+
+    def authenticate_professor!
+      redirect_to recruitments_path unless current_account.professor?
+    end
+
+    def need_permission
+      redirect_to recruitment_path(@recruitment) unless @recruitment.professor_id == @professor.id
     end
 
     def recruitment_params
