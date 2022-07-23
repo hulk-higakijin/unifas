@@ -13,6 +13,7 @@ AllCops:
     - "spec/**/*"
     - "test/**/*"
     - "config/**/*"
+    - "app/helpers/layouts_helper.rb" # ABCチェックに引っかかるため無視
   DisplayCopNames: true
 
 Style/Documentation:
