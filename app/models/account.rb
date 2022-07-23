@@ -5,4 +5,7 @@ class Account < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum status: { unidentified: 0, candidate: 1, professor: 2 }
+
+  has_one :professor
+  has_one :candidate
 end
