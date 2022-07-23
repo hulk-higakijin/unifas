@@ -14,20 +14,12 @@
     </button>
     <div class="hidden w-full md:block md:w-auto" id="mobile-menu">
       <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-        <li>
-          <%= link_to "Home", root_path, class: "hover:text-primary block py-2 pr-4 pl-3 border-b md:border-0 border-gray-100 #{request.path == '/' ? "text-primary" : "hover:text-primary" }" %>
-        </li>
-        <li>
-          <%= link_to "Recruitments", recruitments_path, class: "hover:text-primary block py-2 pr-4 pl-3 border-b md:border-0 border-gray-100 #{request.path.include?('/recruitments') ? "text-primary" : "hover:text-primary"}" %>
-        </li>
-        <% if account_signed_in? %>
-          <li>
-            <%= link_to "Logout", destroy_account_session_path, data: { turbo_method: :delete }, class: "hover:text-primary block py-2 pr-4 pl-3 border-b md:border-0 border-gray-100" %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to "Login", new_account_session_path, class: "hover:text-primary block py-2 pr-4 pl-3 border-b md:border-0 border-gray-100" %>
-          </li>
+        <% nav_lists.each do |list| %>
+          <% if list[:active] %>
+            <li>
+              <%= link_to list[:title], list[:path], data: { turbo_method: list[:method]}, class: "hover:text-primary block py-2 pr-4 pl-3 border-b md:border-0 border-gray-100 #{list[:unique_class]}" %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>
