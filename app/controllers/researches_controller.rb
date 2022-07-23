@@ -2,7 +2,7 @@ class ResearchesController < ApplicationController
   before_action :set_research, only: %i[show edit update destroy]
 
   def index
-    @researches = Research.eager_load([faculty: :university])
+    @researches = Research.eager_load([faculty: :university], :professor)
   end
 
   def show; end
