@@ -1,22 +1,16 @@
-<div id="<%= dom_id research %>">
-  <p>
-    <strong>Title:</strong>
-    <%= research.title %>
-  </p>
-
-  <p>
-    <strong>Body:</strong>
-    <%= research.body %>
-  </p>
-
-  <p>
-    <strong>Professor:</strong>
-    <%= research.professor_id %>
-  </p>
-
-  <p>
-    <strong>Faculty:</strong>
-    <%= research.faculty_id %>
-  </p>
-
-</div>
+<%= link_to research_path(research) do %>
+  <div class="card w-96 bg-base-100 shadow-xl mx-auto" id="<%= dom_id research %>">
+    <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+    <div class="card-body">
+      <h2 class="card-title">
+        <%= research.title %>
+        <div class="badge badge-secondary">NEW</div>
+      </h2>
+      <p><%= research.body %></p>
+      <div class="card-actions justify-end">
+        <div class="badge badge-outline text-xs"><%= research.university.name %></div>
+        <div class="badge badge-outline text-xs"><%= research.faculty.name %></div>
+      </div>
+    </div>
+  </div>
+<% end %>
