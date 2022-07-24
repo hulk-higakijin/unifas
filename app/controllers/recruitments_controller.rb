@@ -1,5 +1,8 @@
 class RecruitmentsController < ApplicationController
+  include Professorable
+
   before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new edit create update]
+  before_action :set_professor, only: %i[create edit update destroy]
   before_action :set_recruitment
 
   def index; end
@@ -43,16 +46,11 @@ class RecruitmentsController < ApplicationController
 
     def set_recruitment
       case action_name
-      when 'index'
-        @recruitments = Recruitment.eager_load([faculty: :university])
-      when 'show'
-        @recruitment = Recruitment.find(params[:id])
-      when 'new'
-        @recruitment = Recruitment.new
-      when 'create'
-        @recruitment = current_account.professor.recruitments.new(recruitment_params)
-      when 'edit', 'update', 'destroy'
-        @recruitment = current_account.professor.recruitments.find(params[:id])
+      when 'index' then @recruitments = Recruitment.eager_load([faculty: :university])
+      when 'show' then @recruitment = Recruitment.find(params[:id])
+      when 'new' then @recruitment = Recruitment.new
+      when 'create' then @recruitment = @professor.recruitments.new(recruitment_params)
+      when 'edit', 'update', 'destroy' then @recruitment = @professor.recruitments.find(params[:id])
       end
     end
 
