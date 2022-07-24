@@ -1,5 +1,8 @@
 class ResearchesController < ApplicationController
+  include Professorable
+
   before_action :set_research, only: %i[show edit update destroy]
+  before_action :set_professor, only: %i[create]
 
   def index
     @researches = Research.eager_load([faculty: :university], :professor)
@@ -9,21 +12,19 @@ class ResearchesController < ApplicationController
 
   def new
     @research = Research.new
+    @universities = University.active ## 同上
+    @university = University.find_by(id: params[:university_id])
   end
 
   def edit; end
 
   def create
-    @research = Research.new(research_params)
+    @research = @professor.researches.new(research_params)
 
-    respond_to do |format|
-      if @research.save
-        format.html { redirect_to research_url(@research), notice: 'Research was successfully created.' }
-        format.json { render :show, status: :created, location: @research }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @research.errors, status: :unprocessable_entity }
-      end
+    if @research.save
+      redirect_to research_url(@research)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -55,6 +56,6 @@ class ResearchesController < ApplicationController
     end
 
     def research_params
-      params.require(:research).permit(:title, :body, :professor_id, :faculty_id)
+      params.require(:research).permit(:title, :body, :faculty_id)
     end
 end

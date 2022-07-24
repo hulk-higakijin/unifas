@@ -1,4 +1,6 @@
 class RecruitmentsController < ApplicationController
+  include Professorable
+
   before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new edit create update]
   before_action :set_recruitment, only: %i[show edit update destroy]
   before_action :set_professor, only: %i[create update edit]
@@ -49,10 +51,6 @@ class RecruitmentsController < ApplicationController
 
     def set_recruitment
       @recruitment = Recruitment.find(params[:id])
-    end
-
-    def set_professor
-      @professor = current_account.professor
     end
 
     def authenticate_professor!
