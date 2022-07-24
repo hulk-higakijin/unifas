@@ -3,7 +3,7 @@ class RecruitmentsController < ApplicationController
 
   before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new edit create update]
   before_action :set_recruitment, only: %i[show edit update destroy]
-  before_action :set_professor, only: %i[create update edit]
+  before_action :set_professor, only: %i[create edit]
   before_action :need_permission, only: %i[edit]
 
   def index
