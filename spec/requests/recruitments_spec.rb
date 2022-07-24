@@ -98,9 +98,10 @@ RSpec.describe "Recruitments", type: :request do
         sign_in account
       end
 
-      it "詳細ページにリダイレクトされること" do
-        get edit_recruitment_path(@recruitment)
-        expect(response).to redirect_to recruitment_path(@recruitment)
+      it "NotFoundエラーがでること" do
+        expect do
+          get edit_recruitment_path(@recruitment)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
@@ -205,15 +206,10 @@ RSpec.describe "Recruitments", type: :request do
         sign_in professor.account
       end
 
-      it "更新した募集の値が変わらないこと" do
+      it "NotFoundエラーがでること" do
         expect do
           put recruitment_path(@recruitment), params: { recruitment: valid_params }
-        end.not_to change { Recruitment.find(@recruitment.id).title }
-      end
-
-      it "詳細ページにリダイレクトされること" do
-        put recruitment_path(@recruitment), params: { recruitment: valid_params }
-        expect(response).to redirect_to recruitment_path(@recruitment)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
