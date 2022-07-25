@@ -1,7 +1,7 @@
 class RecruitmentsController < ApplicationController
   include Professorable
 
-  before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new edit create update]
+  before_action -> { authenticate_account! && authenticate_professor!(recruitments_path) }, only: %i[new edit create update]
   before_action :set_professor, only: %i[create edit update destroy]
   before_action :set_recruitment
 
@@ -52,10 +52,6 @@ class RecruitmentsController < ApplicationController
       when 'create' then @recruitment = @professor.recruitments.new(recruitment_params)
       when 'edit', 'update', 'destroy' then @recruitment = @professor.recruitments.find(params[:id])
       end
-    end
-
-    def authenticate_professor!
-      redirect_to recruitments_path unless current_account.professor?
     end
 
     def recruitment_params

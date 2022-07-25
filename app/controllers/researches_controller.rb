@@ -1,8 +1,9 @@
 class ResearchesController < ApplicationController
   include Professorable
 
-  before_action :set_research, only: %i[show edit update destroy]
-  before_action :set_professor, only: %i[create edit]
+  before_action -> { authenticate_account! && authenticate_professor!(researches_path) }, only: %i[new edit create update]
+  before_action :set_research, only: %i[show]
+  before_action :set_professor, only: %i[create edit update destroy]
 
   def index
     @researches = Research.eager_load([faculty: :university], :professor)
@@ -17,6 +18,7 @@ class ResearchesController < ApplicationController
   end
 
   def edit
+    @research = @professor.researches.find(params[:id])
     @universities = University.active ## 同上
     @university = @research.university
   end
@@ -27,19 +29,23 @@ class ResearchesController < ApplicationController
     if @research.save
       redirect_to research_url(@research)
     else
+      @universities = University.active ## 同上
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
+    @research = @professor.researches.find(params[:id])
     if @research.update(research_params)
       redirect_to research_url(@research), notice: 'Research was successfully updated.'
     else
+      @universities = University.active ## 同上
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+    @research = @professor.researches.find(params[:id])
     @research.destroy
     redirect_to researches_url, notice: 'Research was successfully destroyed.'
   end
