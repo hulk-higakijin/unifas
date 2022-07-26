@@ -8,4 +8,5 @@ class Account < ApplicationRecord
 
   has_one :professor
   has_one :candidate
+  has_many :messages
 end
