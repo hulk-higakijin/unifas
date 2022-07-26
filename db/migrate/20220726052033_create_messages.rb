@@ -1,7 +1,7 @@
 class CreateMessages < ActiveRecord::Migration[7.0]
   def change
     create_table :messages do |t|
-      t.text :context
+      t.text :content
       t.references :account, null: false, foreign_key: true
       t.references :room, null: false, foreign_key: true
 

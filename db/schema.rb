@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_053125) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "context"
+    t.text "content"
     t.bigint "account_id", null: false
     t.bigint "room_id", null: false
     t.datetime "created_at", null: false
