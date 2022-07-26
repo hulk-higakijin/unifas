@@ -12,12 +12,12 @@ module HomeHelper
 
   def footers
     [
-      { title: "About", link: "#" },
-      { title: "Blog", link: "#" },
-      { title: "Team", link: "#" },
-      { title: "Pricing", link: "#" },
-      { title: "Contact", link: "#" },
-      { title: "Terms", link: "#" }
+      { title: 'About', link: '#' },
+      { title: 'Blog', link: '#' },
+      { title: 'Team', link: '#' },
+      { title: 'Pricing', link: '#' },
+      { title: 'Contact', link: '#' },
+      { title: 'Terms', link: '#' }
     ]
   end
 
