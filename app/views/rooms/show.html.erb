@@ -1,6 +1,17 @@
 <%= render "layouts/navbar" %>
-<p>ここに<%= @room.partner(current_account).name %>との会話を表示</p>
+<section class="max-w-xl mx-auto flex flex-col gap-y-4">
+  <p class="text-xl font-bold"><%= @room.partner(current_account).name %></p>
+  <div class="container mx-auto flex flex-col gap-4">  
+    <%= turbo_frame_tag "rooms" do %>
+      <div style="max-height: 800px;" class="overflow-y-scroll">
+        <% @messages.each do |message| %>
+          <%= render message %>
+        <% end %>
+      </div>
+    <% end %>
 
-<% @messages.each do |message| %>
-  <p><%= message.account.profile.name %>：<%= message.content %></p>
-<% end %>
+    <%= form_with(model: [@room, Message.new]) do |f| %>
+      <%= f.text_field :content, class: "textarea textarea-bordered w-full m-4", placeholder: "チャットを入力" %>
+    <% end %>
+  </div>
+</section>

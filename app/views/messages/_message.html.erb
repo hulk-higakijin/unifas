@@ -1,0 +1,14 @@
+<div class="flex flex-col px-4 py-1">
+  <% if message.account.id == current_account.id %>
+    <div class="ml-auto my-speech-bubble px-4 py-1 w-fit mr-5">
+      <%= message.content %>
+    </div>
+  <% else %>
+    <div class="flex">
+      <%= image_tag("https://pbs.twimg.com/profile_images/1388720052862525444/6Ge2RLYf_400x400.jpg", class: "w-10 h-10 my-auto rounded-full border border-gray-200 shadow-xl") %>
+      <div class="your-speech-bubble px-4 py-1 ml-8 w-fit h-fit my-auto">
+        <%= message.content %>
+      </div>
+    </div>
+  <% end %>
+</div>

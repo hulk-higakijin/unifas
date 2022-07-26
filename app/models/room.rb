@@ -4,6 +4,6 @@ class Room < ApplicationRecord
   has_many :accounts, through: :room_accounts
 
   def partner(current_account)
-    accounts.includes([:professor, :candidate]).filter_map { |account| account.profile unless account.id == current_account.id }.first
+    accounts.includes(%i[professor candidate]).filter_map { |account| account.profile unless account.id == current_account.id }.first
   end
 end
