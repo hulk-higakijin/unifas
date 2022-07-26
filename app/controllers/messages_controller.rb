@@ -4,13 +4,9 @@ class MessagesController < ApplicationController
     @message = current_account.messages.new(message_params)
     @message.room_id = params[:room_id]
 
-    if @message.save
-      redirect_to @room
-    else
-
-    end
+    redirect_to @room if @message.save
   end
-  
+
   private
 
     def message_params
