@@ -1,0 +1,6 @@
+<%= render "layouts/navbar" %>
+<p>ここに<%= @room.partner(current_account).name %>との会話を表示</p>
+
+<% @messages.each do |message| %>
+  <p><%= message.account.profile.name %>：<%= message.content %></p>
+<% end %>
