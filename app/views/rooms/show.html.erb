@@ -3,7 +3,7 @@
   <p class="text-xl font-bold"><%= @room.partner(current_account).name %></p>
   <div class="container mx-auto flex flex-col gap-4">  
     <%= turbo_frame_tag "rooms" do %>
-      <div style="max-height: 800px;" class="overflow-y-scroll">
+      <div style="max-height: 600px;" class="overflow-y-scroll">
         <% @messages.each do |message| %>
           <%= render message %>
         <% end %>
