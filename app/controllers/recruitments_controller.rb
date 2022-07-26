@@ -1,17 +1,15 @@
 class RecruitmentsController < ApplicationController
-  before_action -> { authenticate_account! && authenticate_professor! }, only: %i[new edit create update]
-  before_action :set_recruitment, only: %i[show edit update destroy]
-  before_action :set_professor, only: %i[create update edit]
-  before_action :need_permission, only: %i[edit]
+  include Professorable
 
-  def index
-    @recruitments = Recruitment.eager_load([faculty: :university])
-  end
+  before_action -> { authenticate_account! && authenticate_professor!(recruitments_path) }, only: %i[new edit create update]
+  before_action :set_professor, only: %i[create edit update destroy]
+  before_action :set_recruitment
+
+  def index; end
 
   def show; end
 
   def new
-    @recruitment = Recruitment.new
     @universities = University.active ## professor_universtiesを参照して、教授の大学のみを選択可能にする
     @university = University.find_by(id: params[:university_id])
   end
@@ -22,7 +20,6 @@ class RecruitmentsController < ApplicationController
   end
 
   def create
-    @recruitment = @professor.recruitments.new(recruitment_params)
     if @recruitment.save
       redirect_to recruitment_path(@recruitment)
     else
@@ -48,19 +45,13 @@ class RecruitmentsController < ApplicationController
   private
 
     def set_recruitment
-      @recruitment = Recruitment.find(params[:id])
-    end
-
-    def set_professor
-      @professor = current_account.professor
-    end
-
-    def authenticate_professor!
-      redirect_to recruitments_path unless current_account.professor?
-    end
-
-    def need_permission
-      redirect_to recruitment_path(@recruitment) unless @recruitment.professor_id == @professor.id
+      case action_name
+      when 'index' then @recruitments = Recruitment.eager_load([faculty: :university])
+      when 'show' then @recruitment = Recruitment.find(params[:id])
+      when 'new' then @recruitment = Recruitment.new
+      when 'create' then @recruitment = @professor.recruitments.new(recruitment_params)
+      when 'edit', 'update', 'destroy' then @recruitment = @professor.recruitments.find(params[:id])
+      end
     end
 
     def recruitment_params

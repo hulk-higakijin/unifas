@@ -2,23 +2,23 @@
 <section class="container mx-auto px-4 md:px-0 md:py-6 flex flex-col gap-y-4">
   <div class="flex">
     <div class="flex gap-x-2">
-      <div class="badge badge-outline"><%= @recruitment.university.name %></div>
-      <div class="badge badge-outline"><%= @recruitment.faculty.name %></div>
+      <div class="badge badge-outline"><%= @research.university.name %></div>
+      <div class="badge badge-outline"><%= @research.faculty.name %></div>
     </div>
     <div class="ml-auto">
-      <p class="text-sm font-bold">on <%= format(@recruitment.created_at) %></p>
+      <p class="text-sm font-bold">on <%= format(@research.created_at) %></p>
     </div>
   </div>
-  <h1 class="font-bold text-3xl"><i class="fa-solid fa-user-plus px-4"></i><%= @recruitment.title %></h1>
+  <h1 class="font-bold text-3xl"><i class="fa-solid fa-book-open px-4"></i><%= @research.title %></h1>
   <div class="flex gap-x-2">
     <%= image_tag("https://pbs.twimg.com/profile_images/1388720052862525444/6Ge2RLYf_400x400.jpg", class: "w-10 h-10 my-auto rounded-full border border-gray-200 shadow-xl") %>
-    <p class="my-auto"><%= @recruitment.professor.name %></p>
-    <% if account_signed_in? && current_account.professor? && @recruitment.professor_id == current_account.professor.id %>
+    <p class="my-auto"><%= @research.professor.name %></p>
+    <% if account_signed_in? && current_account.professor? && @research.professor_id == current_account.professor.id %>
       <div class="ml-auto flex gap-x-2">
-        <%= link_to edit_recruitment_path(@recruitment) do %>
+        <%= link_to edit_research_path(@research) do %>
           <i class="fa-solid fa-pen h-5 p-2 my-auto rounded-md border-2 border-primary hover:bg-primary text-primary hover:text-base-100"></i>
         <% end %>
-        <%= button_to @recruitment, method: :delete, form: { data: { 'turbo-confirm': "「#{@recruitment.title}」を削除しますか？" }} do %>
+        <%= button_to @research, method: :delete, form: { data: { 'turbo-confirm': "「#{@research.title}」を削除しますか？" }} do %>
           <i class="fa-solid fa-trash h-5 p-2 my-auto rounded-md border-2 border-error hover:bg-error text-error hover:text-base-100"></i> 
         <% end %>
       </div>
@@ -27,10 +27,10 @@
   <%= image_tag("https://cdn-ak.f.st-hatena.com/images/fotolife/t/travelyokohama/20210402/20210402171756.jpg", class: "object-cover h-96") %>
   <div class="flex">
     <p class="py-2">
-      <i class="fa-solid fa-location-dot h-5 w-5 px-2"></i><%= @recruitment.university.prefecture.name %>
+      <i class="fa-solid fa-location-dot h-5 w-5 px-2"></i><%= @research.university.prefecture.name %>
     </p>
   </div>
   <div class="flex">
-    <%= @recruitment.body %>
+    <%= @research.body %>
   </div>
 </section>

@@ -1,0 +1,13 @@
+<%= render "layouts/navbar" %>
+<section class="container mx-auto">
+  <h1>Researches</h1>
+
+  <div id="researches" class="grid md:grid-cols-3 gap-2">
+    <% @researches.each do |research| %>
+      <%= render research %>
+    <% end %>
+  </div>
+
+  <%= link_to "New research", new_research_path %>
+</section>
+

@@ -1,8 +1,8 @@
   <section class="max-w-xl mx-auto">
     <h1 class="font-bold py-2 text-2xl"><%= title %></h1>
     <div class="flex flex-col gap-4">
-      <%= render "components/select_faculty", path: new_recruitment_path, name: "recruitment", default_faculty_id: @recruitment&.faculty&.id %>
-      <%= form_with(model: recruitment, class: "flex flex-col gap-y-4", id: "content-form") do |form| %>
+      <%= render "components/select_faculty", path: new_research_path, name: "research", default_faculty_id: @research&.faculty&.id %>
+      <%= form_with(model: research, class: "flex flex-col gap-y-4", id: "content-form") do |form| %>
         <div>
           <%= form.label :title, style: "display: block" %>
           <%= form.text_field :title, class: "input input-bordered input-secondary w-full" %>
