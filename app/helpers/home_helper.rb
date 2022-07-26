@@ -9,4 +9,25 @@ module HomeHelper
       { title: 'Next...', body: 'さぁ、未来を拓こう。', icon: 'fa-solid fa-door-open' }
     ]
   end
+
+  def footers
+    [
+      { title: "About", link: "#" },
+      { title: "Blog", link: "#" },
+      { title: "Team", link: "#" },
+      { title: "Pricing", link: "#" },
+      { title: "Contact", link: "#" },
+      { title: "Terms", link: "#" }
+    ]
+  end
+
+  def social_apps
+    [
+      { title: 'Facebook', icon: 'fa-brands fa-facebook', link: '#' },
+      { title: 'Instagram', icon: 'fa-brands fa-instagram', link: '#' },
+      { title: 'Twitter', icon: 'fa-brands fa-twitter', link: '#' },
+      { title: 'Github', icon: 'fa-brands fa-github', link: 'https://github.com/hulk-higakijin/unifas' },
+      { title: 'Dribble', icon: 'fa-brands fa-dribbble', link: '#' }
+    ]
+  end
 end
