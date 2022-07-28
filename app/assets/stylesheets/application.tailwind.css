@@ -1,4 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '~@fortawesome/fontawesome-free/scss/fontawesome'
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+/* turbo-frame {
+  display: block;
+  border: 1px solid blue;
+}
+ */
+
+.my-speech-bubble {
+	position: relative;
+	background: #3b82f6;
+	border-radius: .4em;
+  color: white;
+}
+
+.my-speech-bubble:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-left-color: #3b82f6;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -10px;
+	margin-right: -20px;
+}
+
+.your-speech-bubble {
+	position: relative;
+	background: #e5e7eb;
+	border-radius: .4em;
+}
+
+.your-speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #e5e7eb;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+}

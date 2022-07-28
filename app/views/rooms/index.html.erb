@@ -1,0 +1,9 @@
+<%= render "layouts/navbar" %>
+<section class="container mx-auto">
+  <ul>
+    <% @rooms.each do |room| %>
+      <%= room.partner(current_account).name %>さんとのチャット
+      <%= link_to '詳細を見る', room_path(room), class: "btn btn-sm btn-primary" %>
+    <% end %>
+  </ul>
+</section>

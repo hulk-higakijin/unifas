@@ -8,4 +8,15 @@ class Account < ApplicationRecord
 
   has_one :professor
   has_one :candidate
+  has_many :messages
+  has_many :room_accounts
+  has_many :rooms, through: :room_accounts
+
+  def profile
+    if professor?
+      professor
+    elsif candidate?
+      candidate
+    end
+  end
 end

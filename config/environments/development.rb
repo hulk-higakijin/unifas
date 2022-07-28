@@ -76,3 +76,7 @@ Rails.application.configure do
     Bullet.rails_logger = true #警告を直接Railsログに追加
   end
 end
+
+# accountのprofileメソッドを使う場合、呼び出されていない方でアラートが起きるため、やむを得ず無視する。 
+Bullet.add_safelist :type => :unused_eager_loading, :class_name => "Account", :association => :professor
+Bullet.add_safelist :type => :unused_eager_loading, :class_name => "Account", :association => :candidate
